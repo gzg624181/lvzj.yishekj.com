@@ -145,16 +145,17 @@ else if($action=="add_ticket"){
 	}
 
   //多个分类
-  for($i=0;$i<count($types);$i++){
-  $type = $types[$i];
-  $sql="INSERT INTO pmw_ticket (names,types,flag,label,remarks,level,picarr,solds,posttime,content,xuzhi,lowmoney,orderid) VALUES ('$names','$type','$flag','$label','$remarks',$level,'$picarr',$solds,$posttime,'$content','$xuzhi','$lowmoney',$orderid)";
+
+  for($j=0;$j<count($types);$j++){
+  $ty = $types[$j];
+  $sql="INSERT INTO pmw_ticket (names,types,flag,label,remarks,level,picarr,solds,posttime,content,xuzhi,lowmoney,orderid) VALUES ('$names','$ty','$flag','$label','$remarks',$level,'$picarr',$solds,$posttime,'$content','$xuzhi','$lowmoney',$orderid)";
   }
-  if($dosql->ExecNoneQuery($sql))
-  {
-    $gourl= "scenic.php";
-    header("location:$gourl");
-    exit();
-  }
+
+  $dosql->ExecNoneQuery($sql);
+  $gourl= "scenic.php";
+  header("location:$gourl");
+  exit();
+
 
 }
 //获取景区图片
