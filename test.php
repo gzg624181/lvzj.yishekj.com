@@ -442,60 +442,60 @@ unlink($o_pic);
 //     $content=replacePicUrl($content, $cfg_weburl);
 //     echo $content;
 //
-
- $content ='22223242345<img alt="" src="/uploads/image/20190627/1561634483.png" /> <img alt="" src="/uploads/image/20190627/1561634044.png" /> 45354325<img alt="" src="/uploads/image/20190627/1561639661.png" /> <img alt="" src="/uploads/image/20190627/1561636990.png" />345254 <img alt="" src="/uploads/image/20190627/1561639134.png" />';
-
-$r=$dosql->GetOne("SELECT xuzhi from pmw_ticket where id=1");
-//$xuzhi=stripslashes($r['xuzhi']);
-$xuzhi=replacePicUrl($r['xuzhi'], $cfg_weburl);
-
-echo $xuzhi;
-echo "<pre>";
-echo replacePicUrl($content,$cfg_weburl);
-
-    function replacePicUrl($content = null, $strUrl = null) {
-    		if ($strUrl) {
-    				//提取图片路径的src的正则表达式 并把结果存入$matches中
-    				preg_match_all("/<img(.*)src=\"([^\"]+)\"[^>]+>/U",$content,$matches);
-    				$img = "";
-    				if(!empty($matches)) {
-    				//注意，上面的正则表达式说明src的值是放在数组的第三个中
-    				$img = $matches[2];
-    				}else {
-    					 $img = "";
-    				}
-
-    					if (!empty($img)) {
-    								$patterns= array();
-    								$replacements = array();
-    								foreach($img as $imgItem){
-
-                      if(!filter_var($imgItem, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED)){
-                        $final_imgUrl = $strUrl.$imgItem;
-                      }else{
-                        $final_imgUrl = $imgItem;
-                      }
-
-    										$replacements[] = $final_imgUrl;
-    										$img_new = "/".preg_replace("/\//i","\/",$imgItem)."/";
-    										$patterns[] = $img_new;
-    								}
-
-    								//让数组按照key来排序
-    								ksort($patterns);
-    								ksort($replacements);
-
-    								//替换内容
-    								$vote_content  = preg_replace($patterns, $replacements, $content);
-
-    								return  $vote_content;
-    				}else {
-    						return   $content;
-    				}
-    		} else {
-    				return   $content;
-    		}
-    }
+//
+//  $content ='22223242345<img alt="" src="/uploads/image/20190627/1561634483.png" /> <img alt="" src="/uploads/image/20190627/1561634044.png" /> 45354325<img alt="" src="/uploads/image/20190627/1561639661.png" /> <img alt="" src="/uploads/image/20190627/1561636990.png" />345254 <img alt="" src="/uploads/image/20190627/1561639134.png" />';
+//
+// $r=$dosql->GetOne("SELECT xuzhi from pmw_ticket where id=1");
+// //$xuzhi=stripslashes($r['xuzhi']);
+// $xuzhi=replacePicUrl($r['xuzhi'], $cfg_weburl);
+//
+// echo $xuzhi;
+// echo "<pre>";
+// echo replacePicUrl($content,$cfg_weburl);
+//
+//     function replacePicUrl($content = null, $strUrl = null) {
+//     		if ($strUrl) {
+//     				//提取图片路径的src的正则表达式 并把结果存入$matches中
+//     				preg_match_all("/<img(.*)src=\"([^\"]+)\"[^>]+>/U",$content,$matches);
+//     				$img = "";
+//     				if(!empty($matches)) {
+//     				//注意，上面的正则表达式说明src的值是放在数组的第三个中
+//     				$img = $matches[2];
+//     				}else {
+//     					 $img = "";
+//     				}
+//
+//     					if (!empty($img)) {
+//     								$patterns= array();
+//     								$replacements = array();
+//     								foreach($img as $imgItem){
+//
+//                       if(!filter_var($imgItem, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED)){
+//                         $final_imgUrl = $strUrl.$imgItem;
+//                       }else{
+//                         $final_imgUrl = $imgItem;
+//                       }
+//
+//     										$replacements[] = $final_imgUrl;
+//     										$img_new = "/".preg_replace("/\//i","\/",$imgItem)."/";
+//     										$patterns[] = $img_new;
+//     								}
+//
+//     								//让数组按照key来排序
+//     								ksort($patterns);
+//     								ksort($replacements);
+//
+//     								//替换内容
+//     								$vote_content  = preg_replace($patterns, $replacements, $content);
+//
+//     								return  $vote_content;
+//     				}else {
+//     						return   $content;
+//     				}
+//     		} else {
+//     				return   $content;
+//     		}
+//     }
 
 
 
@@ -547,4 +547,23 @@ echo replacePicUrl($content,$cfg_weburl);
 //
 //   }
 // }
+
+
+$str = "7";
+
+$array = explode(",",$str);
+
+print_r($array);
+
+$types = "7,8,9";
+
+$array = explode(",",$types);
+
+for($i=0;$i<count($array);$i++){
+  $type = $array[$i];
+  $r=$dosql->GetOne("SELECT title FROM pmw_ticketclass where id=$type");
+  $title .=$r['title'];
+}
+
+echo $title;
 ?>

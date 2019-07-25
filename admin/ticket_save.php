@@ -145,15 +145,17 @@ else if($action=="add_ticket"){
 	}
 
   //多个分类
-
-  for($j=0;$j<count($types);$j++){
-  $ty = $types[$j];
-  $sql="INSERT INTO pmw_ticket (names,types,flag,label,remarks,level,picarr,solds,posttime,content,xuzhi,lowmoney,orderid) VALUES ('$names','$ty','$flag','$label','$remarks',$level,'$picarr',$solds,$posttime,'$content','$xuzhi','$lowmoney',$orderid)";
+  $num = count($types);
+  if($num==1){
+    $type = $types[0];
+  }else{
+    $type = implode(",",$types);
   }
-
-  $dosql->ExecNoneQuery($sql);
+  $sql="INSERT INTO pmw_ticket (names,types,flag,label,remarks,level,picarr,solds,posttime,content,xuzhi,lowmoney,orderid) VALUES ('$names','$type','$flag','$label','$remarks',$level,'$picarr',$solds,$posttime,'$content','$xuzhi','$lowmoney',$orderid)";
+  if($dosql->ExecNoneQuery($sql)){
   $gourl= "scenic.php";
   header("location:$gourl");
+  }
   exit();
 
 
@@ -271,6 +273,11 @@ else if($action=="del100"){
 		$flag = implode(',',$flag);
 	}
 
+  if(is_array($types))
+  {
+    $types = implode(',',$types);
+  }
+
   $dosql->ExecNoneQuery("UPDATE pmw_ticket SET names='$names',types='$types',flag='$flag',lowmoney='$lowmoney',label='$label',remarks='$remarks',level=$level,picarr='$picarr',specs='$specs',content='$content1',xuzhi='$xuzhi',solds=$solds,orderid=$orderid,content='$content' WHERE id=$id");
   $gourl= "scenic.php";
   header("location:$gourl");
@@ -346,6 +353,11 @@ else if($action=="del100"){
      $gourl = "scenic.php";
      header("location:$gourl");
      exit();
+ }elseif($action=="changeorderid"){
+    $dosql->ExecNoneQuery("UPDATE pmw_ticket set orderid=$orderid where id=$id");
+    $gourl = "scenic.php";
+    header("location:$gourl");
+    exit();
  }
 //无条件返回
 else
