@@ -549,21 +549,28 @@ unlink($o_pic);
 // }
 
 
-$str = "7";
+// $str = "7";
+//
+// $array = explode(",",$str);
+//
+// print_r($array);
+//
+// $types = "7,8,9";
+//
+// $array = explode(",",$types);
+//
+// for($i=0;$i<count($array);$i++){
+//   $type = $array[$i];
+//   $r=$dosql->GetOne("SELECT title FROM pmw_ticketclass where id=$type");
+//   $title .=$r['title'];
+// }
+//
+// echo $title;
 
-$array = explode(",",$str);
-
-print_r($array);
-
-$types = "7,8,9";
-
-$array = explode(",",$types);
-
-for($i=0;$i<count($array);$i++){
-  $type = $array[$i];
-  $r=$dosql->GetOne("SELECT title FROM pmw_ticketclass where id=$type");
-  $title .=$r['title'];
+$id = "34052419800101001X";
+if(is_idcard( $id )){
+  echo "1";
+}else{
+  echo "0";
 }
-
-echo $title;
 ?>

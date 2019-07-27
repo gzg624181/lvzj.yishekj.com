@@ -167,8 +167,12 @@ $adminlevel=$_SESSION['adminlevel'];  //用户级别
 				 $gname = "<i class='fa fa-minus-circle' aria-hidden='true'></i>";
 			 }else{
 			  $r=$dosql->GetOne("SELECT name FROM pmw_guide where id=$gid");
+        if(is_array($r)){
 				 $gname ="<a title='点击查看导游信息' href='javascript:void(0);' onclick=\"checkguide('$gid')\">
 				 {$r['name']}</a>";
+       }else{
+         $gname = "导游已删除";
+       }
 			 }
 			$xingcheng=$row['days'];
 
