@@ -41,20 +41,26 @@ if($action == 'update')
 
   $ymdtime=substr($regtime,0,10);
   $regtime=strtotime($regtime);
+  $r = $dosql->GetOne("SELECT id from pmw_agency where cardpicnumber='$cardpicnumber' and checkinfo=1");
+  if(!is_array($r)){
 
   if($password==""){ //密码不修改
-    $sql = "UPDATE `$tbname` SET name='$name',company='$company', address='$address',cardpic = '$cardpic',agreement='$picarr', images='$images', regtime=$regtime,ymdtime='$ymdtime' WHERE id=$id";
+    $sql = "UPDATE `$tbname` SET name='$name',company='$company', address='$address',cardpic = '$cardpic',agreement='$picarr', images='$images', regtime=$regtime,ymdtime='$ymdtime',cardpicnumber='$cardpicnumber',cardidnumber='$cardidnumber' WHERE id=$id";
   }else{
     $password=md5(md5($password));
-    $sql = "UPDATE `$tbname` SET name='$name',company='$company', address='$address',cardpic = '$cardpic',agreement='$picarr', images='$images', regtime=$regtime,ymdtime='$ymdtime',password='$password' WHERE id=$id";
+    $sql = "UPDATE `$tbname` SET name='$name',company='$company', address='$address',cardpic = '$cardpic',agreement='$picarr', images='$images', regtime=$regtime,ymdtime='$ymdtime',password='$password',cardpicnumber='$cardpicnumber',cardidnumber='$cardidnumber'  WHERE id=$id";
   }
-
-	if($dosql->ExecNoneQuery($sql))
+  if($dosql->ExecNoneQuery($sql))
 	{
 
 		header("location:$gourl");
 		exit();
 	}
+}else{
+  ShowMsg("营业执照号码已被注册，请重新修改！",-1);
+}
+
+
 }
 //ajax获取旅行社营业执照
 else if($action == 'checkagency')

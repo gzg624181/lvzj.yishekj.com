@@ -751,10 +751,11 @@ function isjiesuan($id,$y,$m){
 		$openid= $agency_array['openid'];
 		$formid= $agency_array['formid'];
 		$company = $agency_array['company'];
+		$recommender_openid = $agency_array['recommender_openid'];
 
 		//将旅行社审核未通过的用户单独放到另外一个表里面,全部都是未审核的
 
-		$sql = "INSERT INTO `#@__un_agency` (cardpic,address,name,tel,account,password,regtime,regip,ymdtime,images,getcity,openid,formid,company,checkinfo) VALUES ('$cardpic','$address','$name','$tel','$account','$password',$regtime,'$regip','$ymdtime','$images','$getcity','$openid','$formid','$company',2)";
+		$sql = "INSERT INTO `#@__un_agency` (cardpic,address,name,tel,account,password,regtime,regip,ymdtime,images,getcity,openid,formid,company,checkinfo,recommender_openid) VALUES ('$cardpic','$address','$name','$tel','$account','$password',$regtime,'$regip','$ymdtime','$images','$getcity','$openid','$formid','$company',2,'$recommender_openid')";
 		$dosql->ExecNoneQuery($sql);
 	 }
 
@@ -780,10 +781,11 @@ function isjiesuan($id,$y,$m){
 		$ymdtime = $guide_array['ymdtime'];
 		$images = $guide_array['images'];
 		$getcity = $guide_array['getcity'];
+		$recommender_openid = $guide_array['recommender_openid'];
 
 		//将导游审核未通过的用户单独放到另外一个表里面,全部都是未审核的
 
-		$sql = "INSERT INTO `#@__un_guide` (name,sex,card,cardnumber,tel,account,password,content,pics,regtime,regip,ymdtime,images,getcity,openid,formid,checkinfo) VALUES ('$name',$sex,'$card','$cardnumber','$tel','$account','$password','$content','$pic',$regtime,'$regip','$ymdtime','$images','$getcity','$openid','$formid',2)";
+		$sql = "INSERT INTO `#@__un_guide` (name,sex,card,cardnumber,tel,account,password,content,pics,regtime,regip,ymdtime,images,getcity,openid,formid,checkinfo,recommender_openid) VALUES ('$name',$sex,'$card','$cardnumber','$tel','$account','$password','$content','$pics',$regtime,'$regip','$ymdtime','$images','$getcity','$openid','$formid',2,'$recommender_openid')";
 		$dosql->ExecNoneQuery($sql);
 	 }
 

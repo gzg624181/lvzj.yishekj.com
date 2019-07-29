@@ -164,7 +164,7 @@ $num=$dosql->GetTotalRow($one);
                 <td width="1%" height="36" align="center"><input type="checkbox" name="checkid" id="checkid" onclick="CheckAll(this.checked);" /></td>
                 <td width="7%" align="center">用户账号</td>
                 <td width="6%" align="center">头像</td>
-                <td width="6%" align="center">联系人姓名</td>
+                <td width="6%" align="center">姓名</td>
                 <td width="5%" align="center">营业执照</td>
                 <td width="11%" align="center">旅行社名称</td>
                 <td width="15%" align="center">公司地址</td>
@@ -241,7 +241,7 @@ $num=$dosql->GetTotalRow($one);
                 <td align="center"><?php echo $row['account']; ?></td>
                 <td align="center"><div id="layer-photos-demo_<?php  echo $row['id'];?>" class="layer-photos-demo"> <img  width="100px;" layer-src="<?php echo $images;?>" style="cursor:pointer" onclick="message('<?php echo $row['id']; ?>');"  src="<?php echo $images;?>" alt="<?php echo $row['name']; ?>" /></div></td>
                 <td align="center"><?php echo $row['name']; ?></td>
-                <td align="center" class="num"><a style="cursor:pointer;" onclick="checkagency('<?php echo $row['id'];?>','cardpic');">点击查看</a></td>
+                <td align="center" class="num"><a style="cursor:pointer;" onclick="checkagency('<?php echo $row['id'];?>','cardpic');">查看</a></td>
                 <td align="center"><?php echo $row['company']; ?></td>
                 <td align="center"><?php echo $row['address']; ?></td>
                 <td align="center"><?php echo $row['tel']; ?></td>
