@@ -34,6 +34,8 @@
      * cardid_picarr  身份证正面图片
      * cardid_back  身份证反面图片
      * recommender_openid  推荐人的openid
+     * uid         推荐人的id
+     * recommender_type  推荐人的类别
 
      *  备注：   1.手机号码唯一，同时一个手机号码只能注册导游账号和旅行社账号
      *          2.导游的证件号码唯一
@@ -71,7 +73,8 @@ $cardidnumber = $json['cardidnumber'];
 $cardid_picarr = $json['cardid_picarr'];
 $experience = $json['experience'];
 $recommender_openid = $json['recommender_openid'];
-
+$uid   =  $json['uid'];
+$recommender_type = $json['recommender_type'];
 
 
 $Data = array();
@@ -153,7 +156,7 @@ if(is_array($r)){
     $card_picarr .= $thispic;
   }
 
-  $sql = "INSERT INTO `#@__guide` (name,sex,card,cardnumber,tel,account,password,content,pics,regtime,regip,ymdtime,images,getcity,openid,formid,cardidnumber,cardid_picarr,experience,recommender_openid) VALUES ('$name',$sex,'$card','$cardnumber','$tel','$account','$password','$content','$pic',$regtime,'$regip','$ymdtime','$images','$getcity','$openid','$formid','$cardidnumber','$card_picarr','$experience','$recommender_openid')";
+  $sql = "INSERT INTO `#@__guide` (name,sex,card,cardnumber,tel,account,password,content,pics,regtime,regip,ymdtime,images,getcity,openid,formid,cardidnumber,cardid_picarr,experience,recommender_openid,uid,recommender_type) VALUES ('$name',$sex,'$card','$cardnumber','$tel','$account','$password','$content','$pic',$regtime,'$regip','$ymdtime','$images','$getcity','$openid','$formid','$cardidnumber','$card_picarr','$experience','$recommender_openid','$uid','$recommender_type')";
 
   add_formid($openid,$formid);
 

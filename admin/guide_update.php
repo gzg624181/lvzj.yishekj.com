@@ -17,7 +17,7 @@
 <script type="text/javascript" src="templates/js/ajax.js"></script>
 <script type="text/javascript" src="layer/layer.js"></script>
 <style>
-img {
+.img {
   border: 0;
   border-radius: 12px;
 }

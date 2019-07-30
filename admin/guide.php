@@ -175,6 +175,7 @@ $num=$dosql->GetTotalRow($one);
                 <td width="11%" align="center">注册时间</td>
                 <td width="6%" align="center">已接行程</td>
                 <td width="6%" align="center">已购票</td>
+                <td width="4%" align="center">推荐</td>
                 <td width="10%" align="center">操作</td>
                 </tr>
               <?php
@@ -202,6 +203,7 @@ $num=$dosql->GetTotalRow($one);
 		while($row = $dosql->GetArray())
 		{
 			$id=$row['id'];
+      $type = "guide";
 			switch($row['sex'])
 			{
 				case 1:
@@ -261,6 +263,7 @@ $num=$dosql->GetTotalRow($one);
                 <td align="center"><?php echo date("Y-m-d H:i:s",$row['regtime']);?></td>
                 <td align="center" class="num"><a title="点击查看详情"  style="color:red;font-weight:bold;" href="travel_list.php?check=guide&id=<?php echo $row['id'];?>"><?php echo $guide_num;?></a></td>
                 <td align="center" class="num"><a title="点击查看详情"  style="color:#4a34ea;font-weight:bold;" href="allorder.php?id=<?php echo $row['id'];?>&type=guide&check=guides"><?php echo get_ticket_sum($row['id'],'guide');?></a></td>
+                <td align="center" class="num"><?php echo get_recommender($row['openid'],$type,$id); ?></td>
                 <td align="center">  <span><?php echo $checkinfo; ?></span> &nbsp;
       <?php if($row['checkinfo']!=2){?>
 			<span><a title="编辑" href="guide_update.php?id=<?php echo $row['id']; ?>">

@@ -1,6 +1,6 @@
 <?php
     /**
-	   * 链接地址：get_bank  获取用户提现账号信息
+	   * 链接地址：get_ismymoney  获取系统配置文件里面 我的佣金是否显示
 	   *
      * 下面直接来连接操作数据库进而得到json串
      *
@@ -16,35 +16,22 @@
      *
      * @return string
      *
-     * @用户的uid  用户的类别type（agency  guide）
+     * @提供返回参数账号
      */
 require_once("../../include/config.inc.php");
 $Data = array();
 $Version=date("Y-m-d H:i:s");
 if(isset($token) && $token==$cfg_auth_key){
 
-      $r=$dosql->GetOne("SELECT * FROM `#@__bank` WHERE uid=$uid and type='$type'");
-      if(!is_array($r)){
-        $State = 0;
-        $Descriptor = '暂无数据！';
-        $result = array (
-                    'State' => $State,
-                    'Descriptor' => $Descriptor,
-                    'Version' => $Version,
-                    'Data' => $Data
-                     );
-        echo phpver($result);
-      }else{
       $State = 1;
-      $Descriptor = '内容获取成功！';
+      $Descriptor = '数据获取成功！';
       $result = array (
                   'State' => $State,
                   'Descriptor' => $Descriptor,
                   'Version' => $Version,
-                  'Data' => $r
+                  'Data' => $cfg_mymoney
                    );
       echo phpver($result);
-      }
 
 }else{
   $State = 520;

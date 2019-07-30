@@ -167,12 +167,13 @@ $num=$dosql->GetTotalRow($one);
                 <td width="6%" align="center">姓名</td>
                 <td width="5%" align="center">营业执照</td>
                 <td width="11%" align="center">旅行社名称</td>
-                <td width="15%" align="center">公司地址</td>
+                <td width="10%" align="center">公司地址</td>
                 <td width="8%" align="center">联系电话</td>
                 <td width="9%" align="center">最后登陆城市</td>
                 <td width="10%" align="center">注册时间</td>
-                <td width="6%" align="center">已发布行程</td>
+                <td width="6%" align="center">行程</td>
                 <td width="6%" align="center">已购票</td>
+                <td width="4%" align="center">推荐</td>
                 <td width="10%" align="center">操作</td>
                 </tr>
               <?php
@@ -200,6 +201,7 @@ $num=$dosql->GetTotalRow($one);
 		while($row = $dosql->GetArray())
 		{
 			$id=$row['id'];
+      $type= "agency";
 			if($row['images']==""){
 			$images="../templates/default/images/noimage.jpg";
     }elseif(check_str($row['images'],"https")){
@@ -230,7 +232,7 @@ $num=$dosql->GetTotalRow($one);
 
 			}
 
-            $id=$row['id'];
+      $id=$row['id'];
 			$six=6;
 			$dosql->Execute("SELECT id from pmw_travel where aid=$id",$six);
 			$agency_num=$dosql->GetTotalRow($six);
@@ -249,6 +251,7 @@ $num=$dosql->GetTotalRow($one);
                 <td align="center"><?php echo date("Y-m-d H:i:s",$row['regtime']);?></td>
                 <td align="center" class="num"><a title="点击查看详情"  style="color:red;font-weight:bold;" href="travel_list.php?check=agency&id=<?php echo $row['id'];?>"><?php echo $agency_num;?></a></td>
                 <td align="center" class="num"><a title="点击查看详情"  style="color:#4a34ea;font-weight:bold;" href="allorder.php?id=<?php echo $row['id'];?>&type=agency&check=agencys"><?php echo get_ticket_sum($row['id'],'agency');?></a></td>
+                <td align="center" class="num"><?php echo get_recommender($row['openid'],$type,$id); ?></td>
                 <td align="center">
                 <span><?php echo $checkinfo; ?></span> &nbsp;
       <?php if($row['checkinfo']!=2){?>

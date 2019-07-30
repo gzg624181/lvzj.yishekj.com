@@ -74,6 +74,7 @@ else if($action == 'checkagency')
 }
 
 } else if($action=="checkinfo"){
+
   if($info=="agency"){    //通过旅行社审核
      $dosql->ExecNoneQuery("UPDATE $tbname SET checkinfo=1 WHERE id=$id");
      //将用户发送成功的消息保存起来
@@ -86,7 +87,11 @@ else if($action == 'checkagency')
      $applytime=date("Y-m-d H:i:s",$s['regtime']);
      $sendtime=date("Y-m-d H:i:s");
      $content="亲爱的会员您好，恭喜您申请的旅行社注册信息已通过审核！";
-
+     $recommender_openid =$s['recommender_openid'] ;   //推荐人的openid
+     $recommender_id = $s['uid'];                      //推荐人的id
+     $recommender_type = $s['recommender_type'];       //推荐人的类别
+     //给推荐人发送推荐佣金
+     send_servant($recommender_openid,$recommender_id,$recommender_type,'agency',$id,$s['openid']);
      //============================================================================================
          //将旅行社注册成功的系统消息保存起来
          $type=$info;
@@ -149,6 +154,11 @@ else if($action == 'checkagency')
     $applytime=date("Y-m-d H:i:s",$s['regtime']);
     $sendtime=date("Y-m-d H:i:s");
     $content="亲爱的会员您好，恭喜您申请的导游注册信息已通过审核！";
+    $recommender_openid =$s['recommender_openid'] ;   //推荐人的openid
+    $recommender_id = $s['uid'];                      //推荐人的id
+    $recommender_type = $s['recommender_type'];       //推荐人的类别
+    //给推荐人发送推荐佣金
+    send_servant($recommender_openid,$recommender_id,$recommender_type,'guide',$id,$s['openid']);
 //============================================================================================
     //将导游注册成功的系统消息保存起来
     $type=$info;
