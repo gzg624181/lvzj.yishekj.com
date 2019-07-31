@@ -38,6 +38,11 @@
      *  备注：   1.手机号码唯一，同时一个手机号码只能注册旅行社账号和旅行社账号
      *          2.旅行社营业执照证件号码唯一
      *          3.身份证号码填写正确（与旅行社的信息一致）
+     *
+     *          如果是推荐注册的话，则统计推荐的人数
+
+     *           如果有推荐注册的话，则先来判断是否有这个推荐人，如果有将推荐人的信息保存下来，如果没有
+     *           则没有推荐的信息
 
      *  json返回状态码：  0：此电话号码已经被注册，请重新注册！
      *                  1:旅行社注册信息已提交成功！
@@ -142,7 +147,21 @@ if(is_array($r)){
     $card_picarr .= $thispic;
   }
 
+//判断是否有这个推荐人的信息
+if($recommender_openid!=""){
+  $arr = get_recommender_array($recommender_openid,$recommender_type,$uid);
+  $recommender_openid = $arr['recommender_openid'];
+  $recommender_type   = $arr['recommender_type'];
+  $uid = $arr['uid'];
+}
+
 $sql = "INSERT INTO `#@__agency` (cardpic,address,name,tel,account,password,regtime,regip,ymdtime,images,getcity,openid,formid,company,cardpicnumber,cardidnumber,cardid_picarr,recommender_openid,uid,recommender_type) VALUES ('$cardpic','$address','$name','$tel','$account','$password',$regtime,'$regip','$ymdtime','$images','$getcity','$openid','$formid','$company','$cardpicnumber','$cardidnumber','$card_picarr','$recommender_openid','$uid','$recommender_type')";
+
+
+// 添加推荐统计人数，如果是推荐人推荐注册过来的话，则记录推荐的人数
+if($recommender_openid!=""){
+  add_recommender_nums();
+}
 
 add_formid($openid,$formid);
 

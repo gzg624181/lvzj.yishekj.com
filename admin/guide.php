@@ -172,11 +172,11 @@ $num=$dosql->GetTotalRow($one);
                 <td width="6%" align="center">导游简介</td>
                 <td width="7%" align="center">导游相册</td>
                 <td width="10%" align="center">登陆城市</td>
-                <td width="11%" align="center">注册时间</td>
+                <td width="9%" align="center">注册时间</td>
                 <td width="6%" align="center">已接行程</td>
                 <td width="6%" align="center">已购票</td>
                 <td width="4%" align="center">推荐</td>
-                <td width="10%" align="center">操作</td>
+                <td width="12%" align="center">操作</td>
                 </tr>
               <?php
 		if($check=="today"){
